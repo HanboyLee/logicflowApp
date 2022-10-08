@@ -67,6 +67,19 @@ const EditFlow = () => {
     return proper;
   }, []);
 
+  const setLFElementStyle = React.useCallback(
+    (params) => {
+      console.log(params);
+      activeEdges.forEach(({ id }) => {
+        lfRef.current.setProperties(id, params);
+      });
+      activeNodes.forEach(({ id }) => {
+        lfRef.current.setProperties(id, params);
+      });
+    },
+    [activeEdges, activeNodes, lfRef]
+  );
+
   const initWrokflow = React.useCallback(() => {
     const lf = new LogicFlow({
       ...flowConfig,
@@ -120,7 +133,7 @@ const EditFlow = () => {
           {/* 画布 */}
           <div className="diagram-wrapper">
             <CanvasContainer
-              className="lf-diagram "
+              className="lf-diagram"
               ref={canvasRef}
             ></CanvasContainer>
           </div>
@@ -131,6 +144,7 @@ const EditFlow = () => {
         isOpenPanel={isOpenPanel}
         isDoneLfRef={isDoneLfRef}
         ref={lfRef}
+        setLFElementStyle={setLFElementStyle}
       />
     </Diagram>
   );
@@ -139,6 +153,7 @@ const EditFlow = () => {
 const Diagram = styled.div`
   width: 100%;
   height: 100%;
+  overflow: hidden;
   position: relative;
   & * {
     box-sizing: border-box;
