@@ -11,18 +11,25 @@ import DiagramToolbar from "./Components/DiagramToolbar";
 import { registerCustomElement } from "./Components/node";
 //hooks
 import useCustomRef from "@/hooks/useRefWithcallBack";
+
 import PropertyPanel from "./Components/PropertyPanel";
+import { useProperties } from "@/hooks/EditFlowProvider";
 const EditFlow = () => {
   const canvasRef = React.useRef(null);
-  const lf = React.useRef(null);
+
+  //   hooks
   const [lfRef, setRefLF, isDoneLfRef] = useCustomRef();
+  const [, setProperties] = useProperties();
+
   const [activeNodes, setActiveNodes] = React.useState([]);
   const [activeEdges, setActiveEdges] = React.useState([]);
-  const [properties, setProperties] = React.useState([]);
 
+  //  监听左侧面板
   const isOpenPanel = React.useMemo(() => {
     return activeNodes.length > 0 || activeEdges.length > 0;
   }, [activeNodes, activeEdges]);
+
+  //   初始化设定
   const flowConfig = React.useMemo(
     () => ({
       animation: true,
@@ -46,6 +53,8 @@ const EditFlow = () => {
     }),
     []
   );
+
+  //   拖拉左侧面版到主面板区
   const dragInNode = React.useCallback(
     (type) => {
       lfRef.current.dnd.startDrag({
@@ -54,6 +63,8 @@ const EditFlow = () => {
     },
     [lfRef]
   );
+
+  //   获取节点及边样式
   const getProperty = React.useCallback(() => {
     let proper = {};
     const { nodes, edges } = lfRef.current.getSelectElements();
@@ -67,17 +78,74 @@ const EditFlow = () => {
     return proper;
   }, []);
 
+  //添加菜单功能
+  const additionMenu = React.useCallback((lf) => {
+    lf.extension.menu.addMenuConfig({
+      // 节点
+      nodeMenu: [
+        {
+          text: "往上移",
+          callback(node) {
+            lf.setElementZIndex(node.id, "top");
+          },
+        },
+        {
+          text: "往下移",
+          callback(node) {
+            lf.setElementZIndex(node.id, "bottom");
+          },
+        },
+        // {
+        //   text: "属性",
+        //   callback(node) {
+        //     alert(`
+        //   节点id：${node.id}
+        //   节点类型：${node.type}
+        //   节点坐标：(x: ${node.x}, y: ${node.y})`);
+        //   },
+        // },
+      ],
+      //   边
+      edgeMenu: [
+        {
+          text: "往上移",
+          callback(edge) {
+            lf.setElementZIndex(edge.id, "top");
+          },
+        },
+        {
+          text: "往下移",
+          callback(edge) {
+            lf.setElementZIndex(edge.id, "bottom");
+          },
+        },
+        // {
+        //   text: "属性edgeMenu",
+        //   callback(edge) {
+        //     alert(`
+        //   边id：${edge.id}
+        //   边类型：${edge.type}
+        //   边坐标：(x: ${edge.x}, y: ${edge.y})
+        //   源节点id：${edge.sourceNodeId}
+        //   目标节点id：${edge.targetNodeId}`);
+        //   },
+        // },
+      ],
+    });
+  }, []);
+
+  //  设置模组样式
   const setLFElementStyle = React.useCallback(
     (params) => {
-      console.log(params);
-      activeEdges.forEach(({ id }) => {
-        lfRef.current.setProperties(id, params);
-      });
       activeNodes.forEach(({ id }) => {
         lfRef.current.setProperties(id, params);
       });
+      activeEdges.forEach(({ id }) => {
+        lfRef.current.setProperties(id, params);
+      });
+      getProperty();
     },
-    [activeEdges, activeNodes, lfRef]
+    [lfRef, activeNodes, activeEdges, getProperty]
   );
 
   const initWrokflow = React.useCallback(() => {
@@ -94,9 +162,14 @@ const EditFlow = () => {
       edgeText: { overflowMode: "autoWrap", lineHeight: 1.5 },
     });
 
+    // 初始化线条样式
+    lf.setDefaultEdgeType("pro-polyline");
+
     // 注册组件
     registerCustomElement(lf);
-    //小地图
+
+    // 添加Common Menu
+    additionMenu(lf);
     console.log(lf);
     let timer;
     lf.on("selection:selected,node:click,blank:click,edge:click", () => {
@@ -108,11 +181,12 @@ const EditFlow = () => {
       });
     });
     lf.render();
+
     setRefLF(lf);
     return () => {
       clearTimeout(timer);
     };
-  }, [flowConfig, getProperty, setRefLF]);
+  }, [flowConfig, getProperty, setRefLF, additionMenu]);
 
   React.useEffect(() => {
     initWrokflow();

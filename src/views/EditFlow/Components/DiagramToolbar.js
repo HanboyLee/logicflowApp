@@ -40,9 +40,9 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
     },
   ];
 
-  const saveGraph = () => {
-    this.$emit("saveGraph");
-  };
+  //   const saveGraph = () => {
+  //     this.$emit("saveGraph");
+  //   };
   const zoomIn = () => {
     lf.current.zoom(true);
   };
@@ -85,7 +85,6 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
     if (props.isDoneLfRef) {
       mapNavigator();
       lf.current.on("history:change", ({ data: { undoAble, redoAble } }) => {
-        console.log(undoAble, redoAble);
         setIsUndoAble(undoAble);
         setIsRedoAble(redoAble);
       });
@@ -108,6 +107,7 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
     (value) => {
       const { graphModel } = lf.current;
       lf.current.setDefaultEdgeType(value);
+      setLinetype(value);
       const { edges } = lf.current.getSelectElements();
       if (edges && edges.length > 0) {
         edges.forEach((edge) => {
@@ -150,7 +150,11 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
       </ToolbarItem>
 
       <ToolbarItem className="selectBar">
-        <A.Select defaultValue={linetype} onChange={changeLineType}>
+        <A.Select
+          value={linetype}
+          //   defaultValue={linetype}
+          onChange={changeLineType}
+        >
           {lineOptions.map((d) => {
             return (
               <A.Select.Option value={d.value} key={d.value}>
@@ -171,7 +175,7 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
         open={visableModel}
         cancelText="关闭"
       >
-        <DataDialog data={jsonData} ref={lf} />
+        <DataDialog data={jsonData} />
       </A.Modal>
     </>
   );

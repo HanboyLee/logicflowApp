@@ -1,4 +1,5 @@
 import { PolylineEdge, PolylineEdgeModel } from "@logicflow/core";
+import { getTextStyleFunction } from "../getShapeStyleUtil";
 
 class CustomEdgeModel extends PolylineEdgeModel {
   // customTextPosition = true;
@@ -14,6 +15,10 @@ class CustomEdgeModel extends PolylineEdgeModel {
     style.animationDuration = "20s";
     style.strokeDashoffset = "35%";
     return style;
+  }
+  getTextStyle() {
+    const style = super.getTextStyle();
+    return getTextStyleFunction(style, this.properties);
   }
 }
 
