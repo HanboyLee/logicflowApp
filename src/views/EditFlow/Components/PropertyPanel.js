@@ -6,7 +6,7 @@ import { SketchPicker } from "react-color";
 import { shortStyles, borderStyles } from "../constant";
 import clsx from "clsx";
 //components
-import BaseSelectCom from "@/components/SelectCom/BaseSelectCom";
+
 import PropertyPanelStyles from "./PropertyPanelStyles";
 const PropertyPanel = React.forwardRef((props, lf) => {
   const { isOpenPanel, setLFElementStyle } = props;

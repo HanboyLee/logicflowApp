@@ -1,6 +1,12 @@
 import React from "react";
 import LogicFlow from "@logicflow/core";
-import { Menu, Snapshot, MiniMap, SelectionSelect } from "@logicflow/extension";
+import {
+  Menu,
+  Snapshot,
+  MiniMap,
+  SelectionSelect,
+  Group,
+} from "@logicflow/extension";
 import "@logicflow/core/dist/style/index.css";
 import "@logicflow/extension/lib/style/index.css";
 import styled from "styled-components";
@@ -151,7 +157,7 @@ const EditFlow = () => {
   const initWrokflow = React.useCallback(() => {
     const lf = new LogicFlow({
       ...flowConfig,
-      plugins: [Menu, Snapshot, MiniMap, SelectionSelect],
+      plugins: [Menu, Snapshot, MiniMap, SelectionSelect, Group],
       container: canvasRef.current,
     });
 

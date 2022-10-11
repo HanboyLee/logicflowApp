@@ -29,6 +29,7 @@ class HeptagonView extends RectNode.view {
   getResizeShape() {
     const { x, y, width, height } = this.props.model;
     const style = this.props.model.getNodeStyle();
+
     const pointList = [
       [x - 0.205 * width, y - 0.5 * height],
       [x + 0.205 * width, y - 0.5 * height],
@@ -50,6 +51,7 @@ class HeptagonView extends RectNode.view {
       height,
       points: points.join(" "),
     };
+    console.log(attrs, "points");
 
     return h("g", {}, [h("polygon", { ...attrs })]);
   }

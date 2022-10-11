@@ -10,7 +10,7 @@ const useCustomRef = () => {
         setIsDoneRef(true);
       }
     },
-    [setIsDoneRef],
+    [setIsDoneRef]
   );
 
   return [ref, setRef, isDoneRef];

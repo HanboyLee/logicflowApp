@@ -1,0 +1,9 @@
+export { ReactComponent as Ballvalue } from "@/assets/svgs/Ballvalue.svg";
+export { ReactComponent as Hydroscreen } from "@/assets/svgs/Hydroscreen.svg";
+export { ReactComponent as Furnace } from "@/assets/svgs/Furnace.svg";
+export { ReactComponent as Distillationtower } from "@/assets/svgs/Distillationtower.svg";
+export { ReactComponent as Finnedexchanger } from "@/assets/svgs/Finnedexchanger.svg";
+export { ReactComponent as Pump } from "@/assets/svgs/Pump.svg";
+export { ReactComponent as Reactor } from "@/assets/svgs/Reactor.svg";
+export { ReactComponent as Staticmixer } from "@/assets/svgs/Staticmixer.svg";
+export { ReactComponent as ValveFailindeterminate } from "@/assets/svgs/ValveFailindeterminate.svg";

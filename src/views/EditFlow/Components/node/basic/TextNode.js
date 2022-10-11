@@ -10,7 +10,6 @@ class TextNewModel extends TextNodeModel {
   getNodeStyle() {
     const style = super.getNodeStyle();
     const properties = this.getProperties();
-    console.log(123);
     return getShapeStyleFuction(style, properties);
   }
 

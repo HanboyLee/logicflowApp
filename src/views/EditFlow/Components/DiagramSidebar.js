@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
+import * as A from "antd";
+import SidebarCustomIcon from "@/components/LogicFlowCom/SidebarCustomIcon";
 // icon Components
 import {
   Circle,
@@ -29,12 +30,23 @@ import {
   Times,
   Divide,
 } from "./icon";
-import * as A from "antd";
+import {
+  Ballvalue,
+  Distillationtower,
+  Finnedexchanger,
+  Furnace,
+  Hydroscreen,
+  Pump,
+  Reactor,
+  Staticmixer,
+  ValveFailindeterminate,
+} from "@/assets/svgs";
+
 const DiagramSidebar = ({ dragInNode }) => {
   return (
     <DiagramSidebarContinaer>
-      <A.Collapse defaultActiveKey={["1", "2", "3"]}>
-        <A.Collapse.Panel header="General" key="1">
+      <A.Collapse defaultActiveKey={["1", "2", "3", "4"]}>
+        <A.Collapse.Panel header="一般组件" key="1">
           <div className="node-category">
             <div
               className="node-item"
@@ -246,6 +258,65 @@ const DiagramSidebar = ({ dragInNode }) => {
             onMouseDown={() => dragInNode("icon-message")}
           ></div>
         </A.Collapse.Panel>
+        <A.Collapse.Panel header="工厂组件" key="4">
+          <SidebarCustomIcon
+            title="Ballvalue"
+            onMouseDown={() => dragInNode("ballvalue")}
+          >
+            <Ballvalue />
+          </SidebarCustomIcon>
+
+          <SidebarCustomIcon
+            title="Hydroscreen"
+            onMouseDown={() => dragInNode("hydroscreen")}
+          >
+            <Hydroscreen />
+          </SidebarCustomIcon>
+
+          <SidebarCustomIcon
+            title="Furnace"
+            onMouseDown={() => dragInNode("furnace")}
+          >
+            <Furnace />
+          </SidebarCustomIcon>
+
+          <SidebarCustomIcon
+            title="Distillationtower"
+            onMouseDown={() => dragInNode("distillationtower")}
+          >
+            <Distillationtower />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="Finnedexchanger"
+            onMouseDown={() => dragInNode("finnedexchanger")}
+          >
+            <Finnedexchanger />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="Pump"
+            onMouseDown={() => dragInNode("pump")}
+          >
+            <Pump />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="Reactor"
+            onMouseDown={() => dragInNode("reactor")}
+          >
+            <Reactor />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="Staticmixer"
+            onMouseDown={() => dragInNode("staticmixer")}
+          >
+            <Staticmixer />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="ValveFailindeterminate"
+            onMouseDown={() => dragInNode("valveFailindeterminate")}
+          >
+            <ValveFailindeterminate />
+          </SidebarCustomIcon>
+        </A.Collapse.Panel>
       </A.Collapse>
     </DiagramSidebarContinaer>
   );
@@ -303,6 +374,7 @@ const DiagramSidebarContinaer = styled.div`
     background: url("https://dpubstatic.udache.com/static/dpubimg/1TZgBoaq8G/message.png");
     background-size: cover;
   }
+
   .ant-collapse-content > .ant-collapse-content-box {
     padding: 0;
   }

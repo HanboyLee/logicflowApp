@@ -119,7 +119,7 @@ const PropertyPanelStyles = ({ setLFElementStyle }) => {
     [style]
   );
   const isFontStyleState = React.useMemo(
-    () => style.FontStyle === "italic",
+    () => style.fontStyle === "italic",
     [style]
   );
   const onChangeFontWeight = () => {

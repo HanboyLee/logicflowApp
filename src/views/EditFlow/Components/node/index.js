@@ -40,6 +40,17 @@ import Bezier from "./edge/Bezier";
 //线
 import animationEdge from "./line/animationEdge";
 
+// 自定义模版
+import Ballvalue from "./customIcon/Ballvalue";
+import Hydroscreen from "./customIcon/Hydroscreen";
+import Furnace from "./customIcon/Furnace";
+import Distillationtower from "./customIcon/Distillationtower";
+import Finnedexchanger from "./customIcon/Finnedexchanger";
+import Pump from "./customIcon/Pump";
+import Reactor from "./customIcon/Reactor";
+import Staticmixer from "./customIcon/Staticmixer";
+import ValveFailindeterminate from "./customIcon/ValveFailindeterminate";
+
 export const registerCustomElement = (lf) => {
   // 注册基础图形
   lf.register(CircleNode);
@@ -82,4 +93,14 @@ export const registerCustomElement = (lf) => {
   lf.register(Bezier);
   //线
   lf.register(animationEdge);
+  //   自定义模版
+  lf.register(Ballvalue);
+  lf.register(Hydroscreen);
+  lf.register(Furnace);
+  lf.register(Distillationtower);
+  lf.register(Finnedexchanger);
+  lf.register(Pump);
+  lf.register(Reactor);
+  lf.register(Staticmixer);
+  lf.register(ValveFailindeterminate);
 };
