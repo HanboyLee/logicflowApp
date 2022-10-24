@@ -1,0 +1,35 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.drag-container {
+  border: 3px dotted lightgray;
+  padding: 2px;
+}
+
+.drag-container-shallow-hover {
+  border: 3px dotted blue;
+  padding: 2px;
+}
+
+.drag-container-hover {
+  border: 3px dotted orange;
+  padding: 2px;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-row > * {
+  flex: 0 0 auto;
+}
+
+.toolbar {
+  flex: 0 0 auto;
+  padding-right: 2em;
+}
+.toolbar + * {
+  flex: 1 1 auto;
+}

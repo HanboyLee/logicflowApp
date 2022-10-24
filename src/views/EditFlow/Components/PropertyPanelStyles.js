@@ -5,7 +5,11 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { SketchPicker } from "react-color";
+
+//hooks
 import { useProperties } from "@/hooks/EditFlowProvider";
+//components
+import { LabelContent, PanelItem, SelectBar } from "./CommonStyled";
 
 const PropertyPanelStyles = ({ setLFElementStyle }) => {
   const persetColor = React.useMemo(
@@ -346,9 +350,6 @@ PropertyPanelStyles.propTypes = {
   setLFElementStyle: PropTypes.func,
 };
 
-const LabelContent = styled.div`
-  display: inline-block;
-`;
 const Swatch = styled.div`
   padding: 5px;
   background: #fff;
@@ -378,18 +379,7 @@ const Cover = styled.div`
   bottom: 0px;
   left: 0px;
 `;
-const PanelItem = styled.div`
-  width: 100%;
-  margin-top: 1rem;
-  text-align: left;
-`;
-const SelectBar = styled(A.Select)`
-  width: auto;
-  .ant-select-selection-item {
-    display: flex;
-    align-items: center;
-  }
-`;
+
 const NumberInput = styled(A.Input)`
   min-width: 150px;
   width: auto;

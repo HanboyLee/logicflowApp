@@ -1,5 +1,4 @@
 import React from "react";
-
 const useCustomRef = () => {
   const ref = React.useRef(null);
   const [isDoneRef, setIsDoneRef] = React.useState(false);

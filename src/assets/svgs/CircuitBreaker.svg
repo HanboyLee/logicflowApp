@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20000303 Stylable//EN"
+"http://www.w3.org/TR/2000/03/WD-SVG-20000303/DTD/svg-20000303-stylable.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="0.3385in" height="0.0770in" viewBox="0 0 541 123">
+
+<path style="fill:none;stroke:#000;stroke-width:2" d="M15,77 l11,-7 12,-7 13,-6 14,-6 14,-6 15,-5 16,-4 16,-5 17,-3 17,-4 18,-2 18,-3 18,-2 18,-1 19,-1 19,0 19,0 19,1 19,1 18,2 19,3 17,2 17,4 17,3 16,5 16,4 15,5 14,6 14,6 13,6 12,7 11,7" />
+<circle style="fill:#c0c0c0;stroke:#000;stroke-width:2" cx="55" cy="99" r="8" />
+<circle style="fill:#c0c0c0;stroke:#000;stroke-width:2" cx="486" cy="99" r="8" />
+
+</svg>

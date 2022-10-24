@@ -16,7 +16,8 @@ const SidebarCustomIcon = ({ onMouseDown, title, children }) => {
 const NodeItem = styled.div`
   width: 35px;
   height: 35px;
-  margin-right: 5px;
+  margin: 0 5px;
+  cursor: pointer;
   display: inline-block;
   .svg-node {
     left: 1px;

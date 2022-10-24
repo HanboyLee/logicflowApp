@@ -1,19 +1,19 @@
-import CircleNode from './CircleNode'
+import CircleNode from "./CircleNode";
 
 // 椭圆
 class EllipseNewModel extends CircleNode.model {
   initNodeData(data) {
-    super.initNodeData(data)
-    this.rx = 60
-    this.ry = 30
+    super.initNodeData(data);
+    this.rx = 60;
+    this.ry = 30;
   }
   getNodeStyle() {
-    const style = super.getNodeStyle()
-    return {...style}
+    const style = super.getNodeStyle();
+    return { ...style };
   }
 }
 export default {
-  type: 'pro-ellipse',
+  type: "pro-ellipse",
   view: CircleNode.view,
-  model: EllipseNewModel
-}
+  model: EllipseNewModel,
+};

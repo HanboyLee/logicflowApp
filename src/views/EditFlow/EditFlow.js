@@ -11,27 +11,38 @@ import "@logicflow/core/dist/style/index.css";
 import "@logicflow/extension/lib/style/index.css";
 import styled from "styled-components";
 
+//hooks
+import useCustomRef from "@/hooks/useRefWithcallBack";
+import {
+  useProperties,
+  useSelectedCurrentNode,
+} from "@/hooks/EditFlowProvider";
+
 //compoennts
 import DiagramSidebar from "./Components/DiagramSidebar";
 import DiagramToolbar from "./Components/DiagramToolbar";
 import { registerCustomElement } from "./Components/node";
-//hooks
-import useCustomRef from "@/hooks/useRefWithcallBack";
-
 import PropertyPanel from "./Components/PropertyPanel";
-import { useProperties } from "@/hooks/EditFlowProvider";
+//FIXME:暂时弃用
+// import RuleEngineModel from "./Components/RuleEngineDrawer";
+import PopupRuleModel from "./Components/PopupRuleModel";
 const EditFlow = () => {
   const canvasRef = React.useRef(null);
 
   //   hooks
   const [lfRef, setRefLF, isDoneLfRef] = useCustomRef();
   const [, setProperties] = useProperties();
+  const [, setSelectedCurrentNode] = useSelectedCurrentNode();
 
   const [activeNodes, setActiveNodes] = React.useState([]);
   const [activeEdges, setActiveEdges] = React.useState([]);
 
-  //  监听左侧面板
+  //  监听右侧面板显示
   const isOpenPanel = React.useMemo(() => {
+    const isSelectGroup = activeNodes.some((d) => d.type === "selectGroup");
+    if (isSelectGroup || activeNodes.length > 1 || activeEdges.length > 1) {
+      return false;
+    }
     return activeNodes.length > 0 || activeEdges.length > 0;
   }, [activeNodes, activeEdges]);
 
@@ -48,9 +59,7 @@ const EditFlow = () => {
         size: 5,
         visible: false,
       },
-      keyboard: {
-        enabled: true,
-      },
+
       overlapMode: 1,
       autoWrap: true,
       multipleSelectKey: "shift",
@@ -154,11 +163,38 @@ const EditFlow = () => {
     [lfRef, activeNodes, activeEdges, getProperty]
   );
 
+  const setCurrentNodeHandle = React.useCallback(
+    (lf) => {
+      lf.on("node:click,edge:click", (node) => {
+        setSelectedCurrentNode(node);
+      });
+    },
+    [setSelectedCurrentNode]
+  );
+
+  // 初始化
   const initWrokflow = React.useCallback(() => {
     const lf = new LogicFlow({
       ...flowConfig,
       plugins: [Menu, Snapshot, MiniMap, SelectionSelect, Group],
       container: canvasRef.current,
+      keyboard: {
+        enabled: true,
+        shortcuts: [
+          {
+            keys: ["alt+="],
+            callback: () => {
+              lf.zoom(true);
+            },
+          },
+          {
+            keys: ["alt+-"],
+            callback: () => {
+              lf.zoom(false);
+            },
+          },
+        ],
+      },
     });
 
     lf.setTheme({
@@ -177,23 +213,30 @@ const EditFlow = () => {
     // 添加Common Menu
     additionMenu(lf);
     console.log(lf);
+
+    //点击当前的节点目标(focus)
+    setCurrentNodeHandle(lf);
+
     let timer;
     lf.on("selection:selected,node:click,blank:click,edge:click", () => {
       timer = setTimeout(() => {
         const { nodes, edges } = lf.getSelectElements();
+
         setActiveNodes(nodes);
         setActiveEdges(edges);
         getProperty();
       });
     });
+
     lf.render();
 
     setRefLF(lf);
     return () => {
       clearTimeout(timer);
     };
-  }, [flowConfig, getProperty, setRefLF, additionMenu]);
+  }, [flowConfig, getProperty, setRefLF, additionMenu, setCurrentNodeHandle]);
 
+  //   初始化工作流
   React.useEffect(() => {
     initWrokflow();
   }, [initWrokflow]);
@@ -202,7 +245,11 @@ const EditFlow = () => {
     <Diagram>
       {/* 工具列 */}
       <div className="diagram-toolbar">
-        <DiagramToolbar ref={lfRef} isDoneLfRef={isDoneLfRef} />
+        <DiagramToolbar
+          dragInNode={dragInNode}
+          ref={lfRef}
+          isDoneLfRef={isDoneLfRef}
+        />
       </div>
       {/* 侧边工具栏 */}
       <div className="diagramMain">
@@ -226,6 +273,10 @@ const EditFlow = () => {
         ref={lfRef}
         setLFElementStyle={setLFElementStyle}
       />
+
+      <PopupRuleModel />
+      {/* 暂时弃用 */}
+      {/* <RuleEngineModel /> */}
     </Diagram>
   );
 };
@@ -235,6 +286,7 @@ const Diagram = styled.div`
   height: 100%;
   overflow: hidden;
   position: relative;
+  overflow: hidden;
   & * {
     box-sizing: border-box;
   }
@@ -243,7 +295,8 @@ const Diagram = styled.div`
     top: 0;
     left: 200px;
     height: 40px;
-    width: 310px;
+    width: auto;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e5e5e5;
@@ -255,7 +308,7 @@ const Diagram = styled.div`
     width: 100%;
     height: 100%;
     .diagramSidebar {
-      width: 185px;
+      width: 200px;
       height: calc(100% - 40px);
       border-right: 1px solid #dadce0;
     }

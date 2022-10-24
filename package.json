@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^6.4.5",
     "@logicflow/core": "^1.1.29",
     "@logicflow/extension": "^1.1.29",
@@ -19,6 +20,8 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-json-pretty": "^2.2.0",
     "react-router-dom": "^6.4.1",

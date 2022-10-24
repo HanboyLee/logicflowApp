@@ -37,8 +37,12 @@ import IconMessage from "./icon/Message";
 import Ployline from "./edge/Polyline";
 import Line from "./edge/Line";
 import Bezier from "./edge/Bezier";
+
 //线
 import animationEdge from "./line/animationEdge";
+
+// 群组
+import SelectGroup from "./group/SelectGroup";
 
 // 自定义模版
 import Ballvalue from "./customIcon/Ballvalue";
@@ -50,6 +54,14 @@ import Pump from "./customIcon/Pump";
 import Reactor from "./customIcon/Reactor";
 import Staticmixer from "./customIcon/Staticmixer";
 import ValveFailindeterminate from "./customIcon/ValveFailindeterminate";
+import JacketedVessel from "./customIcon/JacketedVessel";
+import Vessel from "./customIcon/Vessel";
+import AtmosphericTank from "./customIcon/AtmosphericTank";
+import Bin from "./customIcon/Bin";
+import FloatingRoofTank from "./customIcon/FloatingRoofTank";
+import GasHolder1 from "./customIcon/GasHolder1";
+import WeighHopper from "./customIcon/WeighHopper";
+import CircuitBreaker from "./customIcon/CircuitBreaker";
 
 export const registerCustomElement = (lf) => {
   // 注册基础图形
@@ -85,14 +97,21 @@ export const registerCustomElement = (lf) => {
   lf.register(ImageSetting);
   lf.register(ImageUser);
   lf.register(ImageCloud);
+
   // 注册image绘制左上角icon节点
   lf.register(IconMessage);
+
   // 注册边
   lf.register(Ployline);
   lf.register(Line);
   lf.register(Bezier);
+
   //线
   lf.register(animationEdge);
+
+  //   群组
+  lf.register(SelectGroup);
+
   //   自定义模版
   lf.register(Ballvalue);
   lf.register(Hydroscreen);
@@ -103,4 +122,12 @@ export const registerCustomElement = (lf) => {
   lf.register(Reactor);
   lf.register(Staticmixer);
   lf.register(ValveFailindeterminate);
+  lf.register(JacketedVessel);
+  lf.register(Vessel);
+  lf.register(AtmosphericTank);
+  lf.register(Bin);
+  lf.register(FloatingRoofTank);
+  lf.register(GasHolder1);
+  lf.register(WeighHopper);
+  lf.register(CircuitBreaker);
 };

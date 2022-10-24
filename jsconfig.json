@@ -1,15 +1,15 @@
 {
-	"compilerOptions": {
-		"baseUrl": ".",
-		"target": "ES6",
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"paths": {
-			"@/*": ["src/*"]
-		},
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/*"]
+    },
 
-		"allowSyntheticDefaultImports": true
-	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "dist"]
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

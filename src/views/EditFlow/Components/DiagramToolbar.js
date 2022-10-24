@@ -117,6 +117,7 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
     },
     [lf]
   );
+
   const showModal = () => {
     setVisableModel((prev) => !prev);
   };
@@ -132,28 +133,44 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
       >
         <AreaSelect size={18} />
       </ToolbarItem>
-      <ToolbarItem onClick={zoomIn}>
-        <ZoomIn size={18} />
-      </ToolbarItem>
-      <ToolbarItem onClick={zoomOut}>
-        <ZoomOut size={18} />
-      </ToolbarItem>
+      <A.Tooltip title="alt + =" placement="bottom">
+        <ToolbarItem onClick={zoomIn}>
+          <ZoomIn size={18} />
+        </ToolbarItem>
+      </A.Tooltip>
 
-      <ToolbarItem onClick={undo}>
-        <StepBack size={18} />
-      </ToolbarItem>
-      <ToolbarItem onClick={redo}>
-        <StepFoward size={18} />
-      </ToolbarItem>
-      <ToolbarItem className="checkJson" onClick={showModal}>
+      <A.Tooltip title="alt + -" placement="bottom">
+        <ToolbarItem onClick={zoomOut}>
+          <ZoomOut size={18} />
+        </ToolbarItem>
+      </A.Tooltip>
+
+      <A.Tooltip title="control + z" placement="bottom">
+        <ToolbarItem onClick={undo}>
+          <StepBack size={18} />
+        </ToolbarItem>
+      </A.Tooltip>
+      <A.Tooltip title="control + y" placement="bottom">
+        <ToolbarItem onClick={redo}>
+          <StepFoward size={18} />
+        </ToolbarItem>
+      </A.Tooltip>
+      <ToolbarItem className="checkNode" onClick={showModal}>
         <span>查看数据</span>
       </ToolbarItem>
-
+      <A.Tooltip title="请拖拽群组组件" placement="bottom">
+        <ToolbarItem
+          className="checkNode"
+          onMouseDown={() => props.dragInNode("selectGroup")}
+        >
+          <span>群组组件</span>
+        </ToolbarItem>
+      </A.Tooltip>
       <ToolbarItem className="selectBar">
         <A.Select
           value={linetype}
           //   defaultValue={linetype}
-          onChange={changeLineType}
+          onSelect={changeLineType}
         >
           {lineOptions.map((d) => {
             return (
@@ -165,7 +182,7 @@ const DiagramToolbar = React.forwardRef((props, lf) => {
         </A.Select>
       </ToolbarItem>
 
-      {/* JSON弹窗 */}
+      {/* JSON数据弹窗 */}
       <A.Modal
         width={"80%"}
         bodyStyle={{ height: `550px`, padding: 0 }}
@@ -185,6 +202,7 @@ export default React.memo(DiagramToolbar);
 
 DiagramToolbar.propTypes = {
   isDoneLfRef: PropsTypes.bool,
+  dragInNode: PropsTypes.func,
 };
 
 const ToolbarItem = styled.div`
@@ -211,13 +229,13 @@ const ToolbarItem = styled.div`
       width: 100%;
     }
   }
-  &.checkJson {
+  &.checkNode {
     &:hover {
       background: #33a3dc;
       color: #fff;
     }
 
-    width: 120px;
+    width: 100px;
     height: 24px;
     border: 1px solid #555;
     background: #fff;

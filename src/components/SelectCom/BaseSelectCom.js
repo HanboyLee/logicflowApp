@@ -8,6 +8,7 @@ const BaseSelectCom = ({
   label,
   specifyLabel,
   specifyValue,
+  styles,
 }) => {
   const option = React.useMemo(() => {
     if (specifyLabel && specifyValue) {
@@ -23,8 +24,8 @@ const BaseSelectCom = ({
   };
   return (
     <div>
-      {label && <span>{label}:</span>}
-      <A.Select value={value} onChange={onSelected}>
+      {label && <span>{label}：</span>}
+      <A.Select style={styles} value={value} onChange={onSelected}>
         {option.map((d) => {
           return (
             <A.Select.Option key={d.value} value={d.value}>
@@ -42,12 +43,15 @@ export default BaseSelectCom;
 BaseSelectCom.propTypes = {
   options: Proptypes.array.isRequired,
   setValue: Proptypes.func.isRequired,
-  value: Proptypes.object.isRequired,
+  value: Proptypes.string.isRequired,
   label: Proptypes.string,
   specifyLabel: Proptypes.string,
   specifyValue: Proptypes.string,
+  styles: Proptypes.object,
 };
 
 BaseSelectCom.defaultProps = {
   options: [{ label: "Test", value: 1 }],
+  specifyValue: "id",
+  specifyLabel: "name",
 };

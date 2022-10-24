@@ -31,21 +31,29 @@ import {
   Divide,
 } from "./icon";
 import {
+  AtmosphericTank,
   Ballvalue,
+  Bin,
+  CircuitBreaker,
   Distillationtower,
   Finnedexchanger,
+  FloatingRoofTank,
   Furnace,
+  GasHolder1,
   Hydroscreen,
+  JacketedVessel,
   Pump,
   Reactor,
   Staticmixer,
   ValveFailindeterminate,
+  Vessel,
+  WeighHopper,
 } from "@/assets/svgs";
 
 const DiagramSidebar = ({ dragInNode }) => {
   return (
     <DiagramSidebarContinaer>
-      <A.Collapse defaultActiveKey={["1", "2", "3", "4"]}>
+      <A.Collapse defaultActiveKey={["4"]}>
         <A.Collapse.Panel header="一般组件" key="1">
           <div className="node-category">
             <div
@@ -316,6 +324,52 @@ const DiagramSidebar = ({ dragInNode }) => {
           >
             <ValveFailindeterminate />
           </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="JacketedVessel"
+            onMouseDown={() => dragInNode("jacketedVessel")}
+          >
+            <JacketedVessel />
+          </SidebarCustomIcon>
+
+          <SidebarCustomIcon
+            title="Vessel"
+            onMouseDown={() => dragInNode("vessel")}
+          >
+            <Vessel />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="AtmosphericTank"
+            onMouseDown={() => dragInNode("atmosphericTank")}
+          >
+            <AtmosphericTank />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon title="Bin" onMouseDown={() => dragInNode("bin")}>
+            <Bin />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="FloatingRoofTank"
+            onMouseDown={() => dragInNode("floatingRoofTank")}
+          >
+            <FloatingRoofTank />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="GasHolder1"
+            onMouseDown={() => dragInNode("gasHolder1")}
+          >
+            <GasHolder1 />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="WeighHopper"
+            onMouseDown={() => dragInNode("weighHopper")}
+          >
+            <WeighHopper />
+          </SidebarCustomIcon>
+          <SidebarCustomIcon
+            title="CircuitBreaker"
+            onMouseDown={() => dragInNode("circuitBreaker")}
+          >
+            <CircuitBreaker />
+          </SidebarCustomIcon>
         </A.Collapse.Panel>
       </A.Collapse>
     </DiagramSidebarContinaer>
@@ -332,8 +386,9 @@ const DiagramSidebarContinaer = styled.div`
   .node-item {
     width: 35px;
     height: 35px;
-    margin-right: 5px;
+    margin: 0 5px;
     display: inline-block;
+    cursor: pointer;
   }
   .node-category {
     border-bottom: 1px solid #e5e5e5;

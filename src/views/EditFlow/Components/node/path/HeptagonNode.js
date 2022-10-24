@@ -51,7 +51,6 @@ class HeptagonView extends RectNode.view {
       height,
       points: points.join(" "),
     };
-    console.log(attrs, "points");
 
     return h("g", {}, [h("polygon", { ...attrs })]);
   }
